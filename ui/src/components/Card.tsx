@@ -1,10 +1,19 @@
 import React from "react";
 import Image from "next/image";
 
+interface CardProps {
+    id: number;
+    image: string;
+    title: string;
+    stock: number;
+    experience: number;
+    oldPrice: number;
+    price: number;
+}
 
-export default function Card() {
+const Card: React.FC<CardProps> = ({ id, image, title, stock, experience, oldPrice, price }) => {
     return (
-        <div className="w-[220px] h-[280px] space-y-2 rounded-lg shadow-2xl p-2 border-2 border-gray-800">
+        <div className="w-[220px] h-[280px] space-y-2 rounded-lg shadow-2xl p-2 bg-white">
             <div className="h-3/5 flex items-center justify-center relative">
                 <Image
                     src="/coce.png"
@@ -42,3 +51,5 @@ export default function Card() {
         </div>
     );
 }
+
+export default Card;

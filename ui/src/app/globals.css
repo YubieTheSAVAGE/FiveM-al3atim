@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.bgimg {
+	background-image: url('https://s3-alpha-sig.figma.com/img/468f/856f/d0e41fbd0299171d3c949f4baf3a1cb2?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Nmb3xSxr78pSPIm51UE0Iw~sWD-ARPTMpJ1QdQN43RPFhOrzKrZq72idaQdKcHTemnXqo~UUKHWuxu91sFR24dTqaLFGJM1ij9a9309MCxM~TDhJNYDETZlnLiviBwUIQh-ethAxEtmCSLQwqG4mYuyfqwOhAyd94rqi58zp2O97NK81NnzDJ5rSJ5re5MbhLgxlfqf3GwMt5r-qjb6Bc1FdQ1GoPvb2I-MZ~sa9ccyFD6ybAaqa7~oNkkr3Pwe3zSqt8RMfYkG2nedOm~xvBOobm9uzl82Tcs7BS8UzCTD40~3HpilKiFia9Qr9BdU1JYbV1z6spZ9HFGb6veRTUg__');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+@layer utilities {
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+   /* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+  }
+}
+
 /* :root {
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
