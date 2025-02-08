@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 interface BasketCardProps {
     id: number;
@@ -7,9 +8,28 @@ interface BasketCardProps {
     title: string;
     price: number;
     quantity: number;
+    stock: number;  
 }
 
-const BasketCard: React.FC<BasketCardProps> = ({ id, image, title, price, quantity }) => {
+const BasketCard: React.FC<BasketCardProps> = ({ id, image, title, price, quantity, stock }) => {
+    const { updateQuantity, removeFromCart } = useCart();
+
+    const handleIncrease = () => {
+        updateQuantity(id, quantity + 1, stock);
+    };
+
+    const handleDecrease = () => {
+        if (quantity > 1) {
+            updateQuantity(id, quantity - 1, stock);
+        } else {
+            removeFromCart(id);
+        }
+    };
+
+    const handleRemove = () => {
+        removeFromCart(id);
+    };
+
     return (
         <div className="w-full h-auto space-y-1 rounded-tr-2xl rounded-bl-2xl shadow-xl p-1 pl-0 bg-white hover:shadow-2xl transition flex items-center justify-between">
             <div className="flex flex-row justify-start items-center">
@@ -23,18 +43,18 @@ const BasketCard: React.FC<BasketCardProps> = ({ id, image, title, price, quanti
                 </div>
             </div>
             <div className="flex flex-col items-center space-y-1">
-                <button className="w-6 h-6 relative bg-[#121223] text-white rounded-[5px] hover:scale-105 transition">
+                <button className="w-6 h-6 relative bg-[#121223] text-white rounded-[5px] hover:scale-105 transition" onClick={handleIncrease}>
                     <span className="text-sm absolute top-0.5 left-[9px]">+</span>
                 </button>
-                <button className="w-6 h-6 relative bg-[#121223] text-white rounded-[5px] hover:scale-105 transition">
+                <button className="w-6 h-6 relative bg-[#121223] text-white rounded-[5px] hover:scale-105 transition" onClick={handleDecrease}>
                     <span className="text-sm absolute top-0.5 left-[9px]">-</span>
                 </button>
-                <button className="w-6 h-6 relative bg-red-700 text-white rounded-[5px] hover:scale-105 transition">
+                <button className="w-6 h-6 relative bg-red-700 text-white rounded-[5px] hover:scale-105 transition" onClick={handleRemove}>
                     <span className="text-sm absolute top-0.5 left-[9px]">x</span>
                 </button>
             </div>
         </div>
     );
-}
+};
 
 export default BasketCard;

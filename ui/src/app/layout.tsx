@@ -1,8 +1,7 @@
-import Providers from "@/components/providers";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-
+import { CartProvider } from "@/context/CartContext";
 const cairo = Cairo({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +17,9 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={cairo.className}>
-				{children}
+				<CartProvider>
+					{children}
+				</CartProvider>
 			</body>
 		</html>
 	);

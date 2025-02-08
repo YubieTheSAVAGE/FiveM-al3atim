@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 interface CardProps {
     id: number;
@@ -12,6 +13,12 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ id, image, title, stock, experience, oldPrice, price }) => {
+    const { addToCart } = useCart();
+
+    const handleAddToCart = () => {
+        addToCart({ id, image, title, price, quantity: 1, stock }, stock);
+    };
+
     return (
         <div className="w-full h-auto space-y-2 rounded-lg shadow-lg p-4 bg-white hover:shadow-2xl transition">
             <div className="h-32 flex items-center justify-center relative">
@@ -42,11 +49,11 @@ const Card: React.FC<CardProps> = ({ id, image, title, stock, experience, oldPri
                     </div>
                 </div>
             </div>
-            <button className="w-full bg-green-500 text-white font-bold py-1 rounded-lg hover:bg-green-600 transition">
-            شراء
+            <button className="w-full bg-green-500 text-white font-bold py-1 rounded-lg hover:bg-green-600 transition" onClick={handleAddToCart}>
+                شراء
             </button>
         </div>
     );
-}
+};
 
 export default Card;

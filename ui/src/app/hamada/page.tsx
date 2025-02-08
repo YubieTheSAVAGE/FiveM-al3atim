@@ -1,8 +1,13 @@
+"use client";
 import React from "react";
 import Card from "@/components/Card";
 import BasketCard from "@/components/BasketCard";
 import { Card as CardType } from "@/types/Card";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
+
+console.log("useCart imported:", useCart); // Debugging log
+
 
 const cards: CardType[] = [
     {
@@ -89,6 +94,10 @@ const cards: CardType[] = [
 ];
 
 export default function Hamada() {
+    const { cartItems } = useCart();
+
+    const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
     return (
         <div className="h-screen pt-[20vh] bgimg bg-cover bg-center ">
             <div className="flex bg-white bg-opacity-30 backdrop-blur-lg w-[70vw] h-[60vh] mx-auto rounded-lg rounded-bl-[60px] shadow-2xl overflow-hidden">
@@ -98,9 +107,9 @@ export default function Hamada() {
                         <h2 className="text-xl font-bold">السلة</h2>
                     </div>
                     <ul className="flex-1 overflow-y-auto no-scrollbar space-y-1">
-                        {cards.length > 0 ? (
-                            cards.map((card) => (
-                                <BasketCard key={card.id} id={card.id} image={card.image} title={card.title} price={card.price} quantity={1} />
+                        {cartItems.length > 0 ? (
+                            cartItems.map((item) => (
+                                <BasketCard key={item.id} id={item.id} image={item.image} title={item.title} price={item.price} quantity={item.quantity} stock={item.stock}/>
                             ))
                         ) : (
                             <li className="text-center text-gray-500">السلة فارغة</li>
@@ -110,7 +119,7 @@ export default function Hamada() {
                     <div className="mt-4 p-2 rounded-lg flex justify-between items-center">
                         <div className="flex flex-col space-y-0 text-center">
                             <span className="font-normal text-xs">إجمالي الفاتورة</span>
-                            <span className="text-2xl font-extrabold">177sr</span>
+                            <span className="text-2xl font-extrabold">{totalPrice}sr</span>
                         </div>
                         <button className="w-24 py-2 flex flex-row justify-center items-center space-x-1 bg-black text-white rounded-full hover:shadow-xl transition">
                             <span>
