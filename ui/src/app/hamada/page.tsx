@@ -98,9 +98,13 @@ export default function Hamada() {
                         <h2 className="text-xl font-bold">السلة</h2>
                     </div>
                     <ul className="flex-1 overflow-y-auto no-scrollbar space-y-1">
-                        {cards.map((card) => (
-                            <BasketCard key={card.id} id={card.id} image={card.image} title={card.title} price={card.price} quantity={1} />
-                        ))}
+                        {cards.length > 0 ? (
+                            cards.map((card) => (
+                                <BasketCard key={card.id} id={card.id} image={card.image} title={card.title} price={card.price} quantity={1} />
+                            ))
+                        ) : (
+                            <li className="text-center text-gray-500">السلة فارغة</li>
+                        )}
                     </ul>
         
                     <div className="mt-4 p-2 rounded-lg flex justify-between items-center">
@@ -132,11 +136,16 @@ export default function Hamada() {
                         <h1 className="font-extrabold text-xl text-center 2xl:text-md">متجر اسماعيل الزامل</h1>
                     </header> 
                     <span className="w-full h-0.5 mt-2 bg-gradient-to-r from-transparent via-red-700 to-transparent"></span> 
-                    <main className="flex-1 p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto no-scrollbar">
-                        {cards.map((card) => (
-                            <Card key={card.id} {...card} />
-                        ))}
-                    </main>
+                        {cards.length > 0 ? (
+                            <main className="flex-1 p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto no-scrollbar">
+                                {cards.map((card) => (
+                                    <Card key={card.id} {...card} />
+                                ))}
+                            </main> 
+                        ) : (
+                            <h3 className="text-center text-black h-full mt-[20vh]">متجر فارغ</h3>
+                        )}
+                        
                 </div>
             </div>
         </div>
